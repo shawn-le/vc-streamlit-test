@@ -66,7 +66,7 @@ if __name__ == '__main__':
     st.divider()
     user_name = st.text_input("Username: ", key="user_name")
     password = st.text_input("Password: ", key="password", type="password")
-    system = st.text_input("System: ", key="system", type="system")
+    system = st.text_input("System: ", key="system")
     uploaded_file = st.file_uploader("Choose a excel file", type=[".xlsx"])
     if uploaded_file is not None:
         # To read file as bytes:
