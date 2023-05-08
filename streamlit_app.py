@@ -81,7 +81,9 @@ if __name__ == '__main__':
         url = "https://brave-walrus-qpgce4.t1171joh.traefikhub.io/receive_json_data"
         headers = {'Content-Type': 'application/json'}
         json_data = trans_xlsx_to_json(_bytes_data, system)
-        response = requests.post(url, headers=headers, json=json_data, auth=(user_name, password))
-        # Display the response
-        st.write(response.status_code)
-        st.write(response.json())
+        if st.button('Submit', help="When you click this button, you acknowledge that the data is correct"):
+            response = requests.post(url, headers=headers, json=json_data, auth=(user_name, password))
+            # Display the response
+            st.write(response.status_code)
+            st.write(response.json())
+
