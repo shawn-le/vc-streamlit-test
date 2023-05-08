@@ -82,8 +82,10 @@ if __name__ == '__main__':
         headers = {'Content-Type': 'application/json'}
         json_data = trans_xlsx_to_json(_bytes_data, system)
         if st.button('Submit', help="When you click this button, you acknowledge that the data is correct"):
-            response = requests.post(url, headers=headers, json=json_data, auth=(user_name, password))
-            # Display the response
-            st.write(response.status_code)
-            st.write(response.json())
-
+            if not all([user_name, password, system]):
+                st.error("Missing one of those Username, Password, System")
+            else:
+                response = requests.post(url, headers=headers, json=json_data, auth=(user_name, password))
+                # Display the response
+                st.write(response.status_code)
+                st.write(response.json())
