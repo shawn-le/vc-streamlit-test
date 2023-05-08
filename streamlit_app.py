@@ -66,6 +66,7 @@ if __name__ == '__main__':
     st.divider()
     user_name = st.text_input("Username: ", key="user_name")
     password = st.text_input("Password: ", key="password", type="password")
+    system = st.text_input("System: ", key="system", type="system")
     uploaded_file = st.file_uploader("Choose a excel file", type=[".xlsx"])
     if uploaded_file is not None:
         # To read file as bytes:
@@ -77,10 +78,9 @@ if __name__ == '__main__':
         dataframe = pd.read_excel(uploaded_file)
         st.caption("Preview")
         st.write(dataframe)
-        _json_data = trans_xlsx_to_json(_bytes_data, 'Bullhorn')
         url = "https://brave-walrus-qpgce4.t1171joh.traefikhub.io/receive_json_data"
         headers = {'Content-Type': 'application/json'}
-        json_data = trans_xlsx_to_json(_bytes_data, 'Bullhorn')
+        json_data = trans_xlsx_to_json(_bytes_data, system)
         response = requests.post(url, headers=headers, json=json_data, auth=(user_name, password))
         # Display the response
         st.write(response.status_code)
